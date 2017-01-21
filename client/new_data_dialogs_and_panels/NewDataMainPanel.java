@@ -53,7 +53,7 @@ public class NewDataMainPanel extends JPanel {
 		btnNewButton.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseReleased(MouseEvent arg0) {
-				openNewOptions(comboBox.getSelectedItem());
+				openNewOptions((InsertDataOptions)comboBox.getSelectedItem());
 			}
 		});
 		btnNewButton.setBounds(173, 160, 145, 23);
@@ -72,27 +72,27 @@ public class NewDataMainPanel extends JPanel {
 		//add new button edit information
 
 	}
-	
-	private void openNewOptions(Object item){
-		
-		switch (item.toString()) {
-		case ("הוסף עובד"):
-			new AddEmployeeDialog();
-			break;
-		case ("הוסף ספק"):
-			new AddSuplierDialog();
-			break;
-		case ("הוספת פרוייקט"):
-			new AddNewProjectDialog();
-			break;
-		case ("הזנת שעות עבודה"):
-			new addWorkingHoursDialog();
-			break;
-		case ("הכנס תשלום"):
-			new addPaymentDialog();
-			break;
-		default:
-			break;
+
+	private void openNewOptions(InsertDataOptions item) {
+
+		switch (item) {
+			case ADD_EMPLOYEE:
+				new AddEmployeeDialog();
+				break;
+			case ADD_SUPPLIER:
+				new AddSuplierDialog();
+				break;
+			case ADD_PROJECT:
+				new AddNewProjectDialog();
+				break;
+			case ENTER_WORKING_HOURS:
+				new addWorkingHoursDialog();
+				break;
+			case ENTER_FEE:
+				new addPaymentDialog();
+				break;
+			default:
+				break;
 		}
 		
 	}
