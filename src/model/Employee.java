@@ -5,13 +5,16 @@ import java.sql.Date;
 import model_params.EmployeeType;
 import model_params.Nationality;
 import org.hibernate.annotations.Entity;
+import org.hibernate.annotations.GenericGenerator;
 
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
+import javax.persistence.*;
 
 @Entity
 public class Employee {
 
+	@Id
+	@GenericGenerator(name="generate" , strategy="increment")
+	@GeneratedValue(strategy = GenerationType.SEQUENCE)
 	private int employeeSerialNumber;
 	private String employeeFirstName;
 	private String employeeLastName;

@@ -6,6 +6,7 @@ import java.sql.Date;
 import java.util.Map;
 
 import Controller.TableNames;
+import model.Client;
 import model.Employee;
 import model_params.EmployeeType;
 import model_params.Nationality;
@@ -23,9 +24,11 @@ public class Db {
 
 	public static void main(String[] args) {
 		try {
-			Employee employee = new Employee(1, "Moshe", "Aloni", "3034034342", new Date(1495488470), Nationality.ISRAEL, EmployeeType.AIR_CONDITIONING,
+			Employee employee = new Employee(3, "Moshe", "Aloni", "3034034342", new Date(1495488470), Nationality.ISRAEL, EmployeeType.AIR_CONDITIONING,
 					"052-8913059", "Tel Aviv Dude", "Yossi The King", 250);
-			Db.getInstance().addEmployee(employee);
+//			Db.getInstance().addObjToDB(employee);
+			Client client = new Client("Kobi", "Cohen", "Givatayim", "05289152554");
+			Db.getInstance().addObjToDB(client);
 		} catch (Exception ignore) {}
 	}
 
@@ -40,14 +43,14 @@ public class Db {
 		return instance;
 	}
 
-	public void addEmployee(Employee employee) {
+	public <E> void addObjToDB(E addToDbObj) {
 		Session session = null;
 		Transaction transaction = null;
 		try
 		{
 			session = sessionFactory.openSession();
 			transaction = session.beginTransaction();
-			session.save(employee);
+			session.save(addToDbObj);
 			transaction.commit();
 		} catch(HibernateException e) {
 			if (transaction != null) {

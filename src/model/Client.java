@@ -1,22 +1,41 @@
 package model;
 
 import model_params.PhoneNumber;
+import org.hibernate.annotations.GenericGenerator;
+
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
 /**
  * Created by Ariel Ramati
  */
 public class Client {
 
+    @Id
+    @GenericGenerator(name="generate" , strategy="increment")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    private int serialNumber;
     private String firstName;
-    private String lastname;
+    private String lastName;
     private String address;
-    private PhoneNumber phoneNumber;
+    private String phoneNumber;
 
-    public Client(String firstName, String lastname, String address, PhoneNumber phoneNumber) {
+    public Client(String firstName, String lastname, String address, String phoneNumber) {
         this.firstName = firstName;
-        this.lastname = lastname;
+        this.lastName = lastname;
         this.address = address;
         this.phoneNumber = phoneNumber;
+    }
+
+    public Client(){}
+
+    public int getSerialNumber() {
+        return serialNumber;
+    }
+
+    public void setSerialNumber(int serialNumber) {
+        this.serialNumber = serialNumber;
     }
 
     public String getFirstName() {
@@ -27,12 +46,12 @@ public class Client {
         this.firstName = firstName;
     }
 
-    public String getLastname() {
-        return lastname;
+    public String getLastName() {
+        return lastName;
     }
 
-    public void setLastname(String lastname) {
-        this.lastname = lastname;
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
     public String getAddress() {
@@ -43,11 +62,11 @@ public class Client {
         this.address = address;
     }
 
-    public PhoneNumber getPhoneNumber() {
+    public String getPhoneNumber() {
         return phoneNumber;
     }
 
-    public void setPhoneNumber(PhoneNumber phoneNumber) {
+    public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
 }

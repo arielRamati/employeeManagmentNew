@@ -1,7 +1,11 @@
 package model;
 
 import model_params.ProjectType;
+import org.hibernate.annotations.GenericGenerator;
 
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import java.sql.Date;
 
 /**
@@ -9,6 +13,10 @@ import java.sql.Date;
  */
 public class Project {
 
+    @Id
+    @GenericGenerator(name="generate" , strategy="increment")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    private int serialNumber;
     private String projectName;
     private Client client;
     private String projectAddress;
@@ -31,6 +39,14 @@ public class Project {
         this.projectType = projectType;
         this.estimatedCost = estimatedCost;
         this.actualCost = actualCost;
+    }
+
+    public int getSerialNumber() {
+        return serialNumber;
+    }
+
+    public void setSerialNumber(int serialNumber) {
+        this.serialNumber = serialNumber;
     }
 
     public String getProjectName() {

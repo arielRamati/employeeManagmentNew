@@ -4,14 +4,14 @@ import java.sql.Date;
 
 public class WorkingHours {
 
-	private Employee employeeName;
+	private int employeeSerialNumber;
 	private Date day;
 	private int enteringHour;
 	private int leavingHour;
 	private String projectName;
 
-	public WorkingHours(Employee employee, Date date, int start, int end, String projectName){
-		this.employeeName = employee;
+	public WorkingHours(int employeeSerialNumber, Date date, int start, int end, String projectName){
+		this.employeeSerialNumber = employeeSerialNumber;
 		this.day = date;
 		this.enteringHour = start;
 		this.leavingHour = end;
@@ -19,16 +19,12 @@ public class WorkingHours {
 	}
 
 	//deafult values for entering and leaving work
-	public WorkingHours(Employee employee, Date date, String projectName) {
-		this.employeeName = employee;
+	public WorkingHours(int employeeSerialNumber, Date date, String projectName) {
+		this.employeeSerialNumber = employeeSerialNumber;
 		this.projectName = projectName;
 		this.day = date;
 		this.enteringHour = 7;
 		this.leavingHour = 4;
-	}
-
-	public Employee getEmployeeName() {
-		return employeeName;
 	}
 
 	public Date getDay() {
@@ -47,8 +43,12 @@ public class WorkingHours {
 		return projectName;
 	}
 
-	public void setEmployeeName(Employee employeeName) {
-		this.employeeName = employeeName;
+	public int getEmployeeSerialNumber() {
+		return employeeSerialNumber;
+	}
+
+	public void setEmployeeSerialNumber(int employeeSerialNumber) {
+		this.employeeSerialNumber = employeeSerialNumber;
 	}
 
 	public void setDay(Date day) {

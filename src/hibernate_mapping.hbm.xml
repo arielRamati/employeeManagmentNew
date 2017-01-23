@@ -37,6 +37,23 @@
         <property name="travelExpenses">
             <column name="travelExpenses"/>
         </property>
+    </class>
 
+    <class name="model.Client" table="clients">
+    <id column="serialNumber" name="serialNumber" >
+        <generator class="increment"/>
+    </id>
+    <property name="firstName">
+        <column name="firstName"/>
+    </property>
+    <property name="lastName">
+        <column name="lastName"/>
+    </property>
+    <property name="address">
+        <column name="address"/>
+    </property>
+    <property name="phoneNumber">
+        <column name="phoneNumber"/>
+    </property>
     </class>
 </hibernate-mapping>

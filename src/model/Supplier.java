@@ -1,9 +1,18 @@
 package model;
 
 import model_params.PhoneNumber;
+import org.hibernate.annotations.GenericGenerator;
+
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
 public class Supplier {
 
+    @Id
+    @GenericGenerator(name="generate" , strategy="increment")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    private int serialNumber;
 	private String firstName;
 	private String lastName;
 	private String address;
@@ -16,7 +25,15 @@ public class Supplier {
 		this.phoneNumber = phoneNumber;
 	}
 
-	public void setFirstName(String firstName) {
+    public int getSerialNumber() {
+        return serialNumber;
+    }
+
+    public void setSerialNumber(int serialNumber) {
+        this.serialNumber = serialNumber;
+    }
+
+    public void setFirstName(String firstName) {
 		this.firstName = firstName;
 	}
 
