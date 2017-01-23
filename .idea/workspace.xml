@@ -1,10 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="c682f71f-354e-4c98-96dc-d55c6e9c2d34" name="Default" comment="Add objects to the model &amp; model params">
+    <list default="true" id="c682f71f-354e-4c98-96dc-d55c6e9c2d34" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/model_params/PaymentType.java" afterPath="$PROJECT_DIR$/src/model_params/PaymentType.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/model_params/PhoneNumber.java" afterPath="$PROJECT_DIR$/src/model_params/PhoneNumber.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -421,7 +419,14 @@
       <option name="project" value="LOCAL" />
       <updated>1485201211968</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Add objects to the model &amp; model params">
+      <created>1485201493618</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1485201493618</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="ToolWindowManager">
