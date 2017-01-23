@@ -1,5 +1,9 @@
 package model_params;
 
+/**
+ * Created by Ariel Ramati
+ */
+
 public enum PaymentType {
 
 	PAYMENT("תשלום"),
@@ -10,7 +14,7 @@ public enum PaymentType {
 	
 	private String value;
 	
-	private PaymentType(String value) {
+	PaymentType(String value) {
 		this.value = value;
 	}
 
