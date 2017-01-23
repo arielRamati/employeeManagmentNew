@@ -4,7 +4,7 @@ import javax.print.attribute.standard.MediaSize;
 
 public enum Nationality {
 	ISRAEL("ישראלי"),
-	PALESTAIN("פלסטיני");
+	PALESTINIAN("פלסטיני");
 
 	String value;
 

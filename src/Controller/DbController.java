@@ -8,7 +8,7 @@ import db.Db;
 public class DbController {
 
 	public DbController() {
-		Db.createDataBase();
+//		Db.createDataBase();
 	}
 	
 	public String getStringFromDB() {

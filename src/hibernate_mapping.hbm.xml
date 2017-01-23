@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="model.Employee" table="employees">
+        <id column="serialNumber" name="employeeSerialNumber" >
+            <generator class="increment"/>
+        </id>
+        <property name="employeeFirstName">
+            <column name="firstName"/>
+        </property>
+        <property name="employeeLastName">
+            <column name="lastName"/>
+        </property>
+        <property name="employeeIDNumber">
+            <column name="ID"/>
+        </property>
+        <property name="ishurExpirationDate">
+            <column name="ishurExpirationDate"/>
+        </property>
+        <property name="nationality">
+            <column name="nationality"/>
+        </property>
+        <property name="employeeType">
+            <column name="type"/>
+        </property>
+        <property name="phoneNumber">
+            <column name="phoneNumber"/>
+        </property>
+        <property name="address">
+            <column name="address"/>
+        </property>
+        <property name="manager">
+        <column name="manager"/>
+        </property>
+        <property name="travelExpenses">
+            <column name="travelExpenses"/>
+        </property>
+
+    </class>
+</hibernate-mapping>

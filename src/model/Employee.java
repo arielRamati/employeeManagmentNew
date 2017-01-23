@@ -4,8 +4,12 @@ import java.sql.Date;
 
 import model_params.EmployeeType;
 import model_params.Nationality;
-import model_params.PhoneNumber;
+import org.hibernate.annotations.Entity;
 
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+
+@Entity
 public class Employee {
 
 	private int employeeSerialNumber;
@@ -13,13 +17,19 @@ public class Employee {
 	private String employeeLastName;
 	private String employeeIDNumber;
 	private Date ishurExpirationDate;
+	@Enumerated(EnumType.STRING)
 	private Nationality nationality;
-	private EmployeeType type;
-	private PhoneNumber phoneNumber;
+	private EmployeeType employeeType;
+	private String phoneNumber;
 	private String address;
 	private String manager;
 	private int travelExpenses;
-	
+
+	/**
+	 * Empty constructor as required by the hibernate framework.
+	 */
+	public Employee() {}
+
 	public Employee(int serial, String firstName, String lastName, String id, Date ishurExpiration, Nationality nash, EmployeeType type,
 			String phoneNumber, String address, String manager, int travelEx ) throws Exception {
 	this.employeeSerialNumber = serial;
@@ -28,13 +38,13 @@ public class Employee {
 	this.employeeIDNumber = id;
 	this.ishurExpirationDate = ishurExpiration;
 	nationality = nash;
-	this.type = type;
-	this.phoneNumber = new PhoneNumber(phoneNumber);
+	this.employeeType = type;
+	this.phoneNumber = phoneNumber; //new PhoneNumber(phoneNumber);
 	this.address = address;
 	this.manager = manager;
 	this.travelExpenses = travelEx;	
 	}
-	
+
 	public int getEmployeeSerialNumber() {
 		return employeeSerialNumber;
 	}
@@ -83,19 +93,19 @@ public class Employee {
 		this.nationality = nationality;
 	}
 
-	public EmployeeType getType() {
-		return type;
+	public EmployeeType getEmployeeType() {
+		return employeeType;
 	}
 
-	public void setType(EmployeeType type) {
-		this.type = type;
+	public void setEmployeeType(EmployeeType employeeType) {
+		this.employeeType = employeeType;
 	}
 
-	public PhoneNumber getPhoneNumber() {
+	public String getPhoneNumber() {
 		return phoneNumber;
 	}
 
-	public void setPhoneNumber(PhoneNumber phoneNumber) {
+	public void setPhoneNumber(String phoneNumber) {
 		this.phoneNumber = phoneNumber;
 	}
 
