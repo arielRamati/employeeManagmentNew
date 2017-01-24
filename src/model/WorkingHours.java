@@ -10,6 +10,8 @@ public class WorkingHours {
 	private int leavingHour;
 	private String projectName;
 
+	public WorkingHours(){}
+
 	public WorkingHours(int employeeSerialNumber, Date date, int start, int end, String projectName){
 		this.employeeSerialNumber = employeeSerialNumber;
 		this.day = date;

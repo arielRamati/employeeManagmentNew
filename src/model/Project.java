@@ -18,7 +18,7 @@ public class Project {
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private int serialNumber;
     private String projectName;
-    private Client client;
+    private String client;
     private String projectAddress;
     private Date startingDate;
     private Date approximateFinishDate;
@@ -28,7 +28,9 @@ public class Project {
     private int estimatedCost;
     private int actualCost;
 
-    public Project(String projectName, Client client, String projectAddress, Date startingDate, Date approximateFinishDate, Date actualFinishDate, String extras, ProjectType projectType, int estimatedCost, int actualCost) {
+    public Project(){}
+
+    public Project(String projectName, String client, String projectAddress, Date startingDate, Date approximateFinishDate, Date actualFinishDate, String extras, ProjectType projectType, int estimatedCost, int actualCost) {
         this.projectName = projectName;
         this.client = client;
         this.projectAddress = projectAddress;
@@ -57,11 +59,11 @@ public class Project {
         this.projectName = projectName;
     }
 
-    public Client getClient() {
+    public String getClient() {
         return client;
     }
 
-    public void setClient(Client client) {
+    public void setClient(String client) {
         this.client = client;
     }
 

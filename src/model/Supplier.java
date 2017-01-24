@@ -16,9 +16,11 @@ public class Supplier {
 	private String firstName;
 	private String lastName;
 	private String address;
-	private PhoneNumber phoneNumber;
+	private String phoneNumber;
 
-	public Supplier(String firstName, String lastName, String adress, PhoneNumber phoneNumber) {
+	public Supplier(){}
+
+	public Supplier(String firstName, String lastName, String adress, String phoneNumber) {
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.address = adress;
@@ -45,7 +47,7 @@ public class Supplier {
 		this.address = address;
 	}
 
-	public void setPhoneNumber(PhoneNumber phoneNumber) {
+	public void setPhoneNumber(String phoneNumber) {
 		this.phoneNumber = phoneNumber;
 	}
 
@@ -61,7 +63,7 @@ public class Supplier {
 		return address;
 	}
 
-	public PhoneNumber getPhoneNumber() {
+	public String getPhoneNumber() {
 		return phoneNumber;
 	}
 

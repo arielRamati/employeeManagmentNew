@@ -22,6 +22,9 @@
         <property name="nationality">
             <column name="nationality"/>
         </property>
+        <property name="idImage">
+            <column name="idImage"/>
+        </property>
         <property name="employeeType">
             <column name="type"/>
         </property>
@@ -55,5 +58,134 @@
     <property name="phoneNumber">
         <column name="phoneNumber"/>
     </property>
+    </class>
+
+    <class name="model.Project" table="projects">
+        <id column="serialNumber" name="serialNumber" >
+            <generator class="increment"/>
+        </id>
+        <property name="projectName">
+            <column name="projectName"/>
+        </property>
+        <property name="client">
+            <column name="client"/>
+        </property>
+        <property name="projectAddress">
+            <column name="projectAddress"/>
+        </property>
+        <property name="startingDate">
+            <column name="startingDate"/>
+        </property>
+        <property name="approximateFinishDate">
+            <column name="approximateFinishDate"/>
+        </property>
+        <property name="actualFinishDate">
+            <column name="actualFinishDate"/>
+        </property>
+        <property name="extras">
+            <column name="extras"/>
+        </property>
+        <property name="projectType">
+            <column name="projectType"/>
+        </property>
+        <property name="estimatedCost">
+            <column name="estimatedCost"/>
+        </property>
+        <property name="actualCost">
+            <column name="actualCost"/>
+        </property>
+    </class>
+
+    <class name="model.Supplier" table="suppliers">
+        <id column="serialNumber" name="serialNumber" >
+            <generator class="increment"/>
+        </id>
+        <property name="firstName">
+            <column name="firstName"/>
+        </property>
+        <property name="lastName">
+            <column name="lastName"/>
+        </property>
+        <property name="phoneNumber">
+            <column name="phoneNumber"/>
+        </property>
+        <property name="address">
+            <column name="address"/>
+        </property>
+    </class>
+
+    <class name="model.WorkingHours" table="working_hours">
+        <id column="serialNumber" name="employeeSerialNumber" >
+            <generator class="increment"/>
+        </id>
+        <property name="day">
+            <column name="day"/>
+        </property>
+        <property name="enteringHour">
+            <column name="enteringHour"/>
+        </property>
+        <property name="leavingHour">
+            <column name="leavingHour"/>
+        </property>
+        <property name="projectName">
+            <column name="projectName"/>
+        </property>
+    </class>
+
+    <class name="model.Salary" table="salaries">
+        <id column="serialNumber" name="serialNumber" >
+            <generator class="increment"/>
+        </id>
+        <property name="employeeID">
+            <column name="employeeID"/>
+        </property>
+        <property name="employeeName">
+            <column name="employeeName"/>
+        </property>
+        <property name="salaryType">
+            <column name="salaryType"/>
+        </property>
+        <property name="fee">
+            <column name="fee"/>
+        </property>
+        <property name="startingFeeDate">
+            <column name="startingFeeDate"/>
+        </property>
+        <property name="endFeeDate">
+            <column name="endFeeDate"/>
+        </property>
+    </class>
+
+    <class name="model.Payment" table="payments">
+        <id column="serialNumber" name="serialNumber" >
+            <generator class="increment"/>
+        </id>
+        <property name="paymentType">
+            <column name="paymentType"/>
+        </property>
+        <property name="receiver">
+            <column name="receiver"/>
+        </property>
+        <property name="paymentSum">
+            <column name="paymentSum"/>
+        </property>
+        <property name="paymentDate">
+            <column name="paymentDate"/>
+        </property>
+        <property name="paymentMethod">
+            <column name="paymentMethod"/>
+        </property>
+        <property name="numberOfPayments">
+            <column name="numberOfPayments"/>
+        </property>
+        <property name="paymentImage">
+            <column name="paymentImage"/>
+        </property>
+        <property name="projectName">
+            <column name="projectName"/>
+        </property>
+        <property name="comment">
+            <column name="comment"/>
+        </property>
     </class>
 </hibernate-mapping>
