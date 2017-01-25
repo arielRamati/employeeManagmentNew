@@ -7,7 +7,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
-public class Supplier {
+public class Supplier extends TableElement {
 
     @Id
     @GenericGenerator(name="generate" , strategy="increment")

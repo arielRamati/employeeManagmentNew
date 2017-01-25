@@ -11,7 +11,7 @@ import java.sql.Date;
 /**
  * Created by Kobi on 1/24/2017.
  */
-public class Salary {
+public class Salary extends TableElement{
 
     @Id
     @GenericGenerator(name = "generate", strategy = "increment")

@@ -2,7 +2,7 @@ package model;
 
 import java.sql.Date;
 
-public class WorkingHours {
+public class WorkingHours extends TableElement{
 
 	private int employeeSerialNumber;
 	private Date day;

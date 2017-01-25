@@ -10,7 +10,7 @@ import javax.persistence.Id;
 /**
  * Created by Ariel Ramati
  */
-public class Client {
+public class Client extends TableElement {
 
     @Id
     @GenericGenerator(name="generate" , strategy="increment")

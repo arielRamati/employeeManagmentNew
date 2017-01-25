@@ -12,7 +12,7 @@ import java.sql.Date;
 /**
  * Created by Kobi on 1/24/2017.
  */
-public class Payment {
+public class Payment extends TableElement{
 
     @Id
     @GenericGenerator(name = "generate", strategy = "increment")
