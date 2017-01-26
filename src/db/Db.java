@@ -61,13 +61,13 @@ public class Db {
 			WorkingHours workingHours = new WorkingHours(1, date, "Building");
 			getInstance().addObjToDB(workingHours);
 
-			List<WorkingHours> workingHoursList = getInstance().getAllObjectsFromDB(WorkingHours.class);
-
-			List<Payment> payments = getInstance().getAllObjectsFromDB(Payment.class);
-
-			FileOutputStream fos = new FileOutputStream("C:\\Users\\Kobi\\Pictures\\test.jpg");
-			fos.write(payments.get(0).getPaymentImage());
-			fos.close();
+//			List<WorkingHours> workingHoursList = getInstance().getAllObjectsFromDB(WorkingHours.class);
+//
+//			List<Payment> payments = getInstance().getAllObjectsFromDB(Payment.class);
+//
+//			FileOutputStream fos = new FileOutputStream("C:\\Users\\Kobi\\Pictures\\test.jpg");
+//			fos.write(payments.get(0).getPaymentImage());
+//			fos.close();
 
 		} catch (Exception ignore) {}
 	}
@@ -93,6 +93,7 @@ public class Db {
 			session.save(addToDbObj);
 			transaction.commit();
 		} catch(HibernateException e) {
+			e.printStackTrace();
 			if (transaction != null) {
 				transaction.rollback();
 			}
