@@ -60,7 +60,6 @@ public class Db {
 
 			WorkingHours workingHours = new WorkingHours(1, date, "Building");
 			getInstance().addObjToDB(workingHours);
-
 //			List<WorkingHours> workingHoursList = getInstance().getAllObjectsFromDB(WorkingHours.class);
 //
 //			List<Payment> payments = getInstance().getAllObjectsFromDB(Payment.class);
