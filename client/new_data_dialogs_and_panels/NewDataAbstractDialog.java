@@ -10,6 +10,7 @@ import javax.swing.JPanel;
 
 import Controller.DbController;
 import Controller.TableNames;
+import model.TableElement;
 import org.eclipse.wb.swing.FocusTraversalOnArray;
 
 import java.awt.event.ActionListener;
@@ -46,7 +47,8 @@ public abstract class NewDataAbstractDialog extends JDialog {
 			okButton = new JButton("OK");
 			okButton.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) {
-					
+					TableNames tableToUpdate = getTable();
+					TableElement tableElement = packToObject();
 					boolean dataSaved = DbController.saveData(getDataInMap());
 					if(dataSaved){
 						//open confirmation Dialog
@@ -69,5 +71,8 @@ public abstract class NewDataAbstractDialog extends JDialog {
 		//TODO add the items and the correct values
 		return returnedList;
 	}
+	protected abstract TableNames getTable();
+
+	protected abstract TableElement packToObject();
 
 }

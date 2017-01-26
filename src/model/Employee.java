@@ -10,7 +10,7 @@ import org.hibernate.annotations.GenericGenerator;
 import javax.persistence.*;
 
 @Entity
-public class Employee {
+public class Employee extends TableElement {
 
     @Id
     @GenericGenerator(name = "generate", strategy = "increment")
@@ -36,7 +36,7 @@ public class Employee {
     }
 
     public Employee(String firstName, String lastName, String id, Date ishurExpiration, Nationality nash, byte[] idImage,
-                    EmployeeType type, String phoneNumber, String address, String manager, int travelEx) throws Exception {
+                    EmployeeType type, String phoneNumber, String address, String manager, int travelEx) {
         this.employeeFirstName = firstName;
         this.employeeLastName = lastName;
         this.employeeIDNumber = id;
