@@ -9,6 +9,8 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import Controller.DbController;
+import Controller.TableNames;
+import model.TableElement;
 
 import javax.swing.JLabel;
 import java.awt.CardLayout;
@@ -76,7 +78,7 @@ public class addWorkingHoursDialog extends NewDataAbstractDialog {
 		JButton btnNewButton = new JButton("הזן שעות לעובד הבא");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				boolean dataSaved = DbController.saveData(getDataInMap());
+				boolean dataSaved = DbController.saveData(packToTableElement());
 				if (dataSaved){
 					dispose();
 					new addWorkingHoursDialog();
@@ -93,5 +95,15 @@ public class addWorkingHoursDialog extends NewDataAbstractDialog {
 		
 		addOkCancelPanel();
 		setVisible(true);
+	}
+
+	@Override
+	protected TableNames getTable() {
+		return null;
+	}
+
+	@Override
+	protected TableElement packToTableElement() {
+		return null;
 	}
 }

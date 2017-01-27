@@ -4,13 +4,13 @@ import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.FlowLayout;
 
-import javax.swing.JButton;
-import javax.swing.JDialog;
-import javax.swing.JPanel;
+import javax.swing.*;
+import javax.swing.plaf.basic.BasicOptionPaneUI;
 
 import Controller.DbController;
 import Controller.TableNames;
 import model.TableElement;
+import model.exception.CanNotCreateObjectException;
 import org.eclipse.wb.swing.FocusTraversalOnArray;
 
 import java.awt.event.ActionListener;
@@ -48,15 +48,21 @@ public abstract class NewDataAbstractDialog extends JDialog {
 			okButton.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) {
 					TableNames tableToUpdate = getTable();
-					TableElement tableElement = packToObject();
-					boolean dataSaved = DbController.saveData(getDataInMap());
-					if(dataSaved){
-						//open confirmation Dialog
+					try {
+						TableElement tableElement = packToTableElement();
+						boolean dataSaved = DbController.saveData(tableElement);
+						if(dataSaved){
+							//open confirmation Dialog
+						}
+						else {
+							//error message
+						}
+						dispose();
+					} catch (CanNotCreateObjectException e) {
+						JOptionPane.showMessageDialog(null, "Can't create a new " +
+								e.getObjectType() + ".\nCheck Your input and try again.");
 					}
-					else {
-						//error message
-					}
-					dispose();
+
 				}
 			});
 			okButton.setActionCommand("OK");
@@ -73,6 +79,6 @@ public abstract class NewDataAbstractDialog extends JDialog {
 	}
 	protected abstract TableNames getTable();
 
-	protected abstract TableElement packToObject();
+	protected abstract TableElement packToTableElement() throws CanNotCreateObjectException;
 
 }

@@ -13,6 +13,9 @@ import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
 import javax.swing.JTextField;
 import java.awt.Insets;
+
+import Controller.TableNames;
+import model.TableElement;
 import org.eclipse.wb.swing.FocusTraversalOnArray;
 
 import Controller.DbController;
@@ -128,6 +131,16 @@ public class AddSuplierDialog extends NewDataAbstractDialog {
 		addOkCancelPanel();
 		
 		setVisible(true);
+	}
+
+	@Override
+	protected TableNames getTable() {
+		return null;
+	}
+
+	@Override
+	protected TableElement packToTableElement() {
+		return null;
 	}
 
 }

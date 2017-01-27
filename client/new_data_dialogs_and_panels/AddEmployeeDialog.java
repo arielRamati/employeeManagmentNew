@@ -154,7 +154,7 @@ public class AddEmployeeDialog extends NewDataAbstractDialog {
 	}
 
 	@Override
-	protected Employee packToObject() {
+	protected Employee packToTableElement() {
 		if (!validateInput()){
 			//error message
 		}

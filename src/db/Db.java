@@ -137,23 +137,12 @@ public class Db {
 	}
 
 
-	//the map is by-table name + values to save- ordered by argument name and its value
-	public static boolean saveData(Map<TableNames, Map<String, Object>> map) throws IOException{
+	public static boolean saveData(TableElement tableElement) throws IOException{
 		
 		boolean returnVal = true;
-		
-		for(TableNames tableName: map.keySet()){
-			String fileLocation = FILE_LOCATION + tableName;
-			File dataXml = new File(fileLocation);
-			//if the file exists- can save the data in it o/w try to create a new file- if success save the data
-			if (dataXml.exists() || dataXml.createNewFile()){
-				returnVal = insertDataToFile(tableName, dataXml, map.get(tableName));	
-			}
-			else{
-				returnVal = false;
-			}
-		}
-		//could not find the file or create a new one- return false
+		//TODO- Kobi here you need to save the table element to the DB and return true false for the insert..
+
+
 		return returnVal;
 	}
 	
@@ -172,5 +161,10 @@ public class Db {
 	private static boolean saveEmployeeTable(Map<String, Object> map) {
 		//i can cast to employee
 		return false;
+	}
+
+	public boolean findClient(String clientName){
+		//TODO- Kobi add query to check if this client name exist in the DB
+		return true;
 	}
 }

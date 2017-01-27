@@ -8,6 +8,8 @@ import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import Controller.TableNames;
+import model.TableElement;
 import model_params.PaymentType;
 
 import javax.swing.JLabel;
@@ -193,6 +195,16 @@ public class addPaymentDialog extends NewDataAbstractDialog {
 		
 		addOkCancelPanel();
 		setVisible(true);
+	}
+
+	@Override
+	protected TableNames getTable() {
+		return null;
+	}
+
+	@Override
+	protected TableElement packToTableElement() {
+		return null;
 	}
 
 }
