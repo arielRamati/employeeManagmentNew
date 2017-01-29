@@ -21,7 +21,7 @@ public class DbController {
 		//need to think how to know where to save it and how to find it
 		Boolean saveResult = null;
 		try {
-			saveResult = Db.saveData(tableElement);
+			saveResult = Db.getInstance().saveData(tableElement);
 		} catch (Exception e) {
 			//catch every excption that happend durring the save and set the return value to false.
 			//TODO- check how to return the error message to the user.

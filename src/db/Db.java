@@ -10,15 +10,18 @@ import java.util.List;
 import java.util.Map;
 
 import Controller.TableNames;
+import com.sun.org.apache.regexp.internal.RE;
 import model.*;
 import model_params.PaymentType;
 import model_params.ProjectType;
 import model_params.SalaryType;
 import org.hibernate.HibernateException;
+import org.hibernate.Query;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.AnnotationConfiguration;
 import org.hibernate.classic.Session;
+import org.hibernate.criterion.Restrictions;
 
 public class Db {
 	
@@ -28,12 +31,12 @@ public class Db {
 
 	public static void main(String[] args) {
 		try {
-			File pic = new File("C:\\Users\\Kobi\\Pictures\\f2fb2fcc3c9b2ada37cf02af881511b1.jpg");
-			byte[] bFile = new byte[(int) pic.length()];
-				FileInputStream fileInputStream = new FileInputStream(pic);
-//				convert file into array of bytes
-				fileInputStream.read(bFile);
-				fileInputStream.close();
+//			File pic = new File("C:\\Users\\Kobi\\Pictures\\f2fb2fcc3c9b2ada37cf02af881511b1.jpg");
+//			byte[] bFile = new byte[(int) pic.length()];
+//				FileInputStream fileInputStream = new FileInputStream(pic);
+////				convert file into array of bytes
+//				fileInputStream.read(bFile);
+//				fileInputStream.close();
 //				Employee employee = new Employee("Moshe", "Aloni", "3034034342", new Date(1495488470), Nationality.ISRAEL,
 //						bFile, EmployeeType.AIR_CONDITIONING, "052-8913059", "Tel Aviv Dude", "Yossi The King", 250);
 //			Db.getInstance().addObjToDB(employee);
@@ -44,22 +47,22 @@ public class Db {
 //			FileOutputStream fos = new FileOutputStream("C:\\Users\\Kobi\\Pictures\\test.jpg");
 //			fos.write(employees.get(0).getIdImage());
 //			fos.close();
-			Date date = new Date(Calendar.getInstance().getTime().getTime());
-			Payment payment = new Payment(PaymentType.LOAN, "Ariel Ramati", 2500, date, "אשראי", 3, bFile, "תוכנה", "אין");
-			getInstance().addObjToDB(payment);
-
-			Project project = new Project("תוכנה", "Ariel Ramati", "Alonei Shilo", date, date, date, "MA ZE OMER",
-					ProjectType.BUILDING, 50000, 60000);
-			getInstance().addObjToDB(project);
-
-			Salary salary = new Salary("343443", "Yossi Moshe", SalaryType.GLOBAL, 5000, date, date);
-			getInstance().addObjToDB(salary);
-
-			Supplier supplier = new Supplier("Adon", "Shlomo", "Tel Aviv University", "111111111");
-			getInstance().addObjToDB(supplier);
-
-			WorkingHours workingHours = new WorkingHours(1, date, "Building");
-			getInstance().addObjToDB(workingHours);
+//			Date date = new Date(Calendar.getInstance().getTime().getTime());
+//			Payment payment = new Payment(PaymentType.LOAN, "Ariel Ramati", 2500, date, "אשראי", 3, bFile, "תוכנה", "אין");
+//			getInstance().saveData(payment);
+//
+//			Project project = new Project("תוכנה", "Ariel Ramati", "Alonei Shilo", date, date, date, "MA ZE OMER",
+//					ProjectType.BUILDING, 50000, 60000);
+//			getInstance().saveData(project);
+//
+//			Salary salary = new Salary("343443", "Yossi Moshe", SalaryType.GLOBAL, 5000, date, date);
+//			getInstance().saveData(salary);
+//
+//			Supplier supplier = new Supplier("Adon", "Shlomo", "Tel Aviv University", "111111111");
+//			getInstance().saveData(supplier);
+//
+//			WorkingHours workingHours = new WorkingHours(1, date, "Building");
+//			getInstance().saveData(workingHours);
 //			List<WorkingHours> workingHoursList = getInstance().getAllObjectsFromDB(WorkingHours.class);
 //
 //			List<Payment> payments = getInstance().getAllObjectsFromDB(Payment.class);
@@ -68,6 +71,7 @@ public class Db {
 //			fos.write(payments.get(0).getPaymentImage());
 //			fos.close();
 
+			Db.getInstance().findClient("Kobi");
 		} catch (Exception ignore) {}
 	}
 
@@ -80,33 +84,6 @@ public class Db {
 			instance = new Db();
 		}
 		return instance;
-	}
-
-	public <E> void addObjToDB(E addToDbObj) {
-		Session session = null;
-		Transaction transaction = null;
-		try
-		{
-			session = sessionFactory.openSession();
-			transaction = session.beginTransaction();
-			session.save(addToDbObj);
-			transaction.commit();
-		} catch(HibernateException e) {
-			e.printStackTrace();
-			if (transaction != null) {
-				transaction.rollback();
-			}
-		}
-		finally {
-			if (session != null)
-			{
-				try {
-					session.close();
-				} catch (HibernateException e) {
-					//writing log message
-				}
-			}
-		}
 	}
 
 	private <E> List<E> getAllObjectsFromDB(Class objClass)
@@ -137,14 +114,35 @@ public class Db {
 	}
 
 
-	public static boolean saveData(TableElement tableElement) throws IOException{
-		
-		boolean returnVal = true;
-		//TODO- Kobi here you need to save the table element to the DB and return true false for the insert..
+	public <E> boolean saveData(E addToDbObj) {
+		boolean isSucceeded;
+		Session session = null;
+		Transaction transaction = null;
+		try {
+			session = sessionFactory.openSession();
+			transaction = session.beginTransaction();
+			session.save(addToDbObj);
+			transaction.commit();
+			isSucceeded = true;
+		} catch (HibernateException e) {
+			isSucceeded = false;
+			e.printStackTrace();
+			if (transaction != null) {
+				transaction.rollback();
+			}
+		} finally {
+			if (session != null) {
+				try {
+					session.close();
+				} catch (HibernateException e) {
+					//writing log message
+				}
+			}
+		}
 
-
-		return returnVal;
+		return isSucceeded;
 	}
+
 	
 	private static boolean insertDataToFile(TableNames tableName, File file, Map<String, Object> map){
 		//TODO xml write
@@ -164,7 +162,15 @@ public class Db {
 	}
 
 	public boolean findClient(String clientName){
+		Session session = sessionFactory.openSession();
+		List results = session.createCriteria(Client.class)
+				.add(Restrictions.eq("firstName", clientName)).add(Restrictions.eq("lastName", "Cohen"))
+				.list();
+//		Query query = s ession.createQuery("FROM clients WHERE firstName = :firstName ");
+//		query.setParameter("firstName", clientName);
+//		List results = query.list();
+
 		//TODO- Kobi add query to check if this client name exist in the DB
-		return true;
+		return !results.isEmpty();
 	}
 }

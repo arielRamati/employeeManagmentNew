@@ -238,6 +238,7 @@ public class AddNewProjectDialog extends NewDataAbstractDialog {
 		} catch (IllegalArgumentException e){
 			return false;
 		}
+		//TODO - Ariel Fix client in GUI - add list choice of clients of add new (Can get the list by using the DB.getAllObjectsFromDB(Client.class)
 		if (!DbController.findClient(customerTextField.getText())){
 			return false;
 		}
