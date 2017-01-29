@@ -1,13 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="c682f71f-354e-4c98-96dc-d55c6e9c2d34" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/new_data_dialogs_and_panels/AddNewProjectDialog.java" afterPath="$PROJECT_DIR$/client/new_data_dialogs_and_panels/AddNewProjectDialog.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Controller/DbController.java" afterPath="$PROJECT_DIR$/src/Controller/DbController.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/db/Db.java" afterPath="$PROJECT_DIR$/src/db/Db.java" />
-    </list>
+    <list default="true" id="c682f71f-354e-4c98-96dc-d55c6e9c2d34" name="Default" comment="" />
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path=".idea/dataSources.local.xml" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -950,7 +944,7 @@
       <updated>1485200993694</updated>
       <workItem from="1485201616926" duration="177000" />
       <workItem from="1485202052648" duration="2729000" />
-      <workItem from="1485283991829" duration="14628000" />
+      <workItem from="1485283991829" duration="14641000" />
     </task>
     <task id="LOCAL-00001" summary="Add objects to the model &amp; model params">
       <created>1485201211968</created>
@@ -1008,11 +1002,18 @@
       <option name="project" value="LOCAL" />
       <updated>1485457298729</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="Merge branch 'master' of https://github.com/arielRamati/employeeManagmentNew&#10;&#10;# Conflicts:&#10;#&#9;.idea/workspace.xml&#10;">
+      <created>1485718733994</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1485718733994</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="17534000" />
+    <option name="totallyTimeSpent" value="17547000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-9" y="-9" width="1938" height="1048" extended-state="6" />
