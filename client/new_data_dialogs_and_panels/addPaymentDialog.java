@@ -1,21 +1,21 @@
 package new_data_dialogs_and_panels;
 
 import java.awt.BorderLayout;
-import java.awt.FlowLayout;
 
-import javax.swing.JButton;
-import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import Controller.TableNames;
+import model.Payment;
 import model.TableElement;
+import model.exception.CanNotCreateObjectException;
 import model_params.PaymentType;
 
 import javax.swing.JLabel;
 import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
+import java.sql.Date;
 import javax.swing.JComboBox;
 import javax.swing.JTextField;
 import javax.swing.DefaultComboBoxModel;
@@ -23,13 +23,14 @@ import javax.swing.DefaultComboBoxModel;
 public class addPaymentDialog extends NewDataAbstractDialog {
 
 	private final JPanel contentPanel = new JPanel();
-	private JTextField textField;
-	private JTextField textField_1;
-	private JTextField textField_2;
-	private JTextField textField_3;
-	private JTextField textField_4;
-	private JTextField textField_5;
-	private JTextField textField_6;
+	JComboBox<String> paymentTypeComboBox;
+	private JTextField gettingPayedTextField;
+	private JTextField paymentAmountTextField;
+	private JTextField paymentDateTextField;
+	private JTextField howPaymentDoneTextField;
+	private JTextField numberOfPaymentsTextField;
+	private JTextField projectNameTextField;
+	private JTextField noteTextField;
 
 
 	/**
@@ -47,15 +48,15 @@ public class addPaymentDialog extends NewDataAbstractDialog {
 		gbl_contentPanel.columnWeights = new double[]{1.0, 0.0, Double.MIN_VALUE};
 		gbl_contentPanel.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, Double.MIN_VALUE};
 		contentPanel.setLayout(gbl_contentPanel);
-		
-		JComboBox<String> comboBox = new JComboBox();
-		comboBox.setModel(new DefaultComboBoxModel(PaymentType.values()));
+
+		paymentTypeComboBox = new JComboBox();
+		paymentTypeComboBox.setModel(new DefaultComboBoxModel(PaymentType.values()));
 		GridBagConstraints gbc_comboBox = new GridBagConstraints();
 		gbc_comboBox.anchor = GridBagConstraints.EAST;
 		gbc_comboBox.insets = new Insets(0, 0, 5, 5);
 		gbc_comboBox.gridx = 0;
 		gbc_comboBox.gridy = 1;
-		contentPanel.add(comboBox, gbc_comboBox);
+		contentPanel.add(paymentTypeComboBox, gbc_comboBox);
 		
 		JLabel label = new JLabel("סוג התשלום:");
 		GridBagConstraints gbc_label = new GridBagConstraints();
@@ -66,14 +67,14 @@ public class addPaymentDialog extends NewDataAbstractDialog {
 		gbc_label.gridy = 1;
 		contentPanel.add(label, gbc_label);
 		
-		textField = new JTextField();
+		gettingPayedTextField = new JTextField();
 		GridBagConstraints gbc_textField = new GridBagConstraints();
 		gbc_textField.insets = new Insets(0, 0, 5, 5);
 		gbc_textField.fill = GridBagConstraints.HORIZONTAL;
 		gbc_textField.gridx = 0;
 		gbc_textField.gridy = 2;
-		contentPanel.add(textField, gbc_textField);
-		textField.setColumns(10);
+		contentPanel.add(gettingPayedTextField, gbc_textField);
+		gettingPayedTextField.setColumns(10);
 		
 		JLabel label_1 = new JLabel("מקבל התשלום:");
 		GridBagConstraints gbc_label_1 = new GridBagConstraints();
@@ -84,14 +85,14 @@ public class addPaymentDialog extends NewDataAbstractDialog {
 		gbc_label_1.gridy = 2;
 		contentPanel.add(label_1, gbc_label_1);
 		
-		textField_1 = new JTextField();
+		paymentAmountTextField = new JTextField();
 		GridBagConstraints gbc_textField_1 = new GridBagConstraints();
 		gbc_textField_1.insets = new Insets(0, 0, 5, 5);
 		gbc_textField_1.fill = GridBagConstraints.HORIZONTAL;
 		gbc_textField_1.gridx = 0;
 		gbc_textField_1.gridy = 3;
-		contentPanel.add(textField_1, gbc_textField_1);
-		textField_1.setColumns(10);
+		contentPanel.add(paymentAmountTextField, gbc_textField_1);
+		paymentAmountTextField.setColumns(10);
 		
 		JLabel label_2 = new JLabel("סכום:");
 		GridBagConstraints gbc_label_2 = new GridBagConstraints();
@@ -101,14 +102,14 @@ public class addPaymentDialog extends NewDataAbstractDialog {
 		gbc_label_2.gridy = 3;
 		contentPanel.add(label_2, gbc_label_2);
 		
-		textField_2 = new JTextField();
+		paymentDateTextField = new JTextField();
 		GridBagConstraints gbc_textField_2 = new GridBagConstraints();
 		gbc_textField_2.insets = new Insets(0, 0, 5, 5);
 		gbc_textField_2.fill = GridBagConstraints.HORIZONTAL;
 		gbc_textField_2.gridx = 0;
 		gbc_textField_2.gridy = 4;
-		contentPanel.add(textField_2, gbc_textField_2);
-		textField_2.setColumns(10);
+		contentPanel.add(paymentDateTextField, gbc_textField_2);
+		paymentDateTextField.setColumns(10);
 		
 		JLabel label_3 = new JLabel("תאריך תשלום:");
 		GridBagConstraints gbc_label_3 = new GridBagConstraints();
@@ -128,23 +129,23 @@ public class addPaymentDialog extends NewDataAbstractDialog {
 		gbc_label_4.gridy = 4;
 		contentPanel.add(label_4, gbc_label_4);
 		
-		textField_3 = new JTextField();
+		howPaymentDoneTextField = new JTextField();
 		GridBagConstraints gbc_textField_3 = new GridBagConstraints();
 		gbc_textField_3.insets = new Insets(0, 0, 5, 5);
 		gbc_textField_3.fill = GridBagConstraints.HORIZONTAL;
 		gbc_textField_3.gridx = 0;
 		gbc_textField_3.gridy = 5;
-		contentPanel.add(textField_3, gbc_textField_3);
-		textField_3.setColumns(10);
+		contentPanel.add(howPaymentDoneTextField, gbc_textField_3);
+		howPaymentDoneTextField.setColumns(10);
 		
-		textField_4 = new JTextField();
+		numberOfPaymentsTextField = new JTextField();
 		GridBagConstraints gbc_textField_4 = new GridBagConstraints();
 		gbc_textField_4.insets = new Insets(0, 0, 5, 5);
 		gbc_textField_4.fill = GridBagConstraints.HORIZONTAL;
 		gbc_textField_4.gridx = 0;
 		gbc_textField_4.gridy = 6;
-		contentPanel.add(textField_4, gbc_textField_4);
-		textField_4.setColumns(10);
+		contentPanel.add(numberOfPaymentsTextField, gbc_textField_4);
+		numberOfPaymentsTextField.setColumns(10);
 		
 		JLabel label_5 = new JLabel("מספר תשלומים:");
 		GridBagConstraints gbc_label_5 = new GridBagConstraints();
@@ -156,14 +157,14 @@ public class addPaymentDialog extends NewDataAbstractDialog {
 		gbc_label_5.gridy = 6;
 		contentPanel.add(label_5, gbc_label_5);
 		
-		textField_5 = new JTextField();
+		projectNameTextField = new JTextField();
 		GridBagConstraints gbc_textField_5 = new GridBagConstraints();
 		gbc_textField_5.insets = new Insets(0, 0, 5, 5);
 		gbc_textField_5.fill = GridBagConstraints.HORIZONTAL;
 		gbc_textField_5.gridx = 0;
 		gbc_textField_5.gridy = 7;
-		contentPanel.add(textField_5, gbc_textField_5);
-		textField_5.setColumns(10);
+		contentPanel.add(projectNameTextField, gbc_textField_5);
+		projectNameTextField.setColumns(10);
 		
 		JLabel label_6 = new JLabel("שם הפרוייקט:");
 		GridBagConstraints gbc_label_6 = new GridBagConstraints();
@@ -174,14 +175,14 @@ public class addPaymentDialog extends NewDataAbstractDialog {
 		gbc_label_6.gridy = 7;
 		contentPanel.add(label_6, gbc_label_6);
 		
-		textField_6 = new JTextField();
+		noteTextField = new JTextField();
 		GridBagConstraints gbc_textField_6 = new GridBagConstraints();
 		gbc_textField_6.insets = new Insets(0, 0, 5, 5);
 		gbc_textField_6.fill = GridBagConstraints.HORIZONTAL;
 		gbc_textField_6.gridx = 0;
 		gbc_textField_6.gridy = 8;
-		contentPanel.add(textField_6, gbc_textField_6);
-		textField_6.setColumns(10);
+		contentPanel.add(noteTextField, gbc_textField_6);
+		noteTextField.setColumns(10);
 		
 		JLabel label_7 = new JLabel("הערה:");
 		GridBagConstraints gbc_label_7 = new GridBagConstraints();
@@ -190,21 +191,41 @@ public class addPaymentDialog extends NewDataAbstractDialog {
 		gbc_label_7.gridx = 1;
 		gbc_label_7.gridy = 8;
 		contentPanel.add(label_7, gbc_label_7);
-		
-		
-		
+
 		addOkCancelPanel();
 		setVisible(true);
 	}
 
 	@Override
 	protected TableNames getTable() {
-		return null;
+		return TableNames.PAYMENTS;
 	}
 
 	@Override
-	protected TableElement packToTableElement() {
-		return null;
+	protected TableElement packToTableElement() throws CanNotCreateObjectException {
+		if (!validateInput()) {
+			throw new CanNotCreateObjectException("Payment");
+		}
+		return new Payment((PaymentType)paymentTypeComboBox.getSelectedItem(),
+				gettingPayedTextField.getText(),
+				Integer.valueOf(paymentAmountTextField.getText()),
+				Date.valueOf(paymentDateTextField.getText()),
+				howPaymentDoneTextField.getText(),
+				Integer.valueOf(numberOfPaymentsTextField.getText()),
+				null,
+				projectNameTextField.getText(),
+				noteTextField.getText());
+	}
+
+	private boolean validateInput() {
+		try {
+			Integer.valueOf(paymentAmountTextField.getText());
+			Date.valueOf(paymentDateTextField.getText());
+			Integer.valueOf(numberOfPaymentsTextField.getText());
+		} catch (IllegalArgumentException e){
+			return false;
+		}
+		return true;
 	}
 
 }
