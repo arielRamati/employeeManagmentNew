@@ -6,7 +6,7 @@ package model_params;
 
 public enum PaymentType {
 
-	PAYMENT("תשלום"),
+	PAYMENT("תשלום משכורת"),
 	LOAN("הלוואה"),
 	VENDOR_PAYMENT("תשלום לספק"),
 	ADVANCE_PAYMENT("מקדמה"),

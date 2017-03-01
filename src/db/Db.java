@@ -86,7 +86,7 @@ public class Db {
 		return instance;
 	}
 
-	private <E> List<E> getAllObjectsFromDB(Class objClass)
+	public <E> List<E> getAllObjectsFromDB(Class objClass)
 	{
 		Session session = null;
 		Transaction transaction = null;

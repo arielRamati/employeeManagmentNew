@@ -1,9 +1,11 @@
 package Controller;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.Map;
 
 import db.Db;
+import model.Client;
 import model.TableElement;
 
 public class DbController {
@@ -30,7 +32,7 @@ public class DbController {
 		return saveResult;
 	}
 
-	public static boolean findClient(String clientName){
-		return Db.getInstance().findClient(clientName);
+	public static List<Client> getAllClients (){
+		return Db.getInstance().getAllObjectsFromDB(Client.class);
 	}
 }

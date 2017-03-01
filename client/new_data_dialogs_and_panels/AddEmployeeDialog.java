@@ -147,7 +147,7 @@ public class AddEmployeeDialog extends NewDataAbstractDialog {
 		JLabel label_6 = new JLabel("עלות הוצאות נסיעה:");
 		label_6.setHorizontalAlignment(SwingConstants.CENTER);
 		panel.add(label_6);
-		
+
 		addOkCancelPanel();
 
 		this.setVisible(true);

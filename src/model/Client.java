@@ -69,4 +69,22 @@ public class Client extends TableElement {
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
+
+    @Override
+    public String toString() {
+        return firstName + " " + lastName;
+    }
+
+    @Override
+    public boolean equals(Object other){
+        if (other instanceof Client) {
+            Client otherClient = (Client)other;
+            if (otherClient.getFirstName().equals(this.getFirstName()) &&
+                    otherClient.getLastName().equals(this.getLastName()) &&
+                    otherClient.getSerialNumber() == this.getSerialNumber()) {
+                return true;
+            }
+        }
+        return false;
+    }
 }

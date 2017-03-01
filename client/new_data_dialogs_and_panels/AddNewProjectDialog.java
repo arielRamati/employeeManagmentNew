@@ -2,6 +2,7 @@ package new_data_dialogs_and_panels;
 
 import Controller.DbController;
 import Controller.TableNames;
+import model.Client;
 import model.Project;
 import model.exception.CanNotCreateObjectException;
 import model_params.ProjectType;
@@ -12,13 +13,16 @@ import javax.swing.border.EmptyBorder;
 
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.sql.Date;
+import java.util.List;
 
 public class AddNewProjectDialog extends NewDataAbstractDialog {
 
 	private final JPanel contentPanel = new JPanel();
 	private JTextField projectNameTextField;
-	private JTextField customerTextField;
+	private JComboBox clientSelectorComboBox;
 	private JTextField addressTextField;
 	private JTextField startDateTextField;
 	private JTextField estimatedFinishingDateTextField;
@@ -152,11 +156,24 @@ public class AddNewProjectDialog extends NewDataAbstractDialog {
 //		gbc_label_10.gridy = 11;
 //		contentPanel.add(label_10);
 		
-		customerTextField = new JTextField();
-		customerTextField.setColumns(10);
-		customerTextField.setBounds(90, 50, 140, 20);
-		contentPanel.add(customerTextField);
-		
+		clientSelectorComboBox = new JComboBox<String>();
+		List<Client> clients = DbController.getAllClients();
+		for (Client client : clients) {
+			clientSelectorComboBox.addItem(client.toString());
+		}
+		clientSelectorComboBox.setBounds(90, 50, 140, 20);
+		contentPanel.add(clientSelectorComboBox);
+
+		JButton addNewClientButton = new JButton("צור לקוח חדש");
+		addNewClientButton.setBounds(5, 50, 75, 20);
+		addNewClientButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed (ActionEvent e) {
+				new AddNewClientDialog();
+			}
+		});
+		contentPanel.add(addNewClientButton);
+
 		addressTextField = new JTextField();
 		addressTextField.setColumns(10);
 		addressTextField.setBounds(90, 91, 140, 20);
@@ -212,16 +229,18 @@ public class AddNewProjectDialog extends NewDataAbstractDialog {
 	@Override
 	protected Project packToTableElement() throws CanNotCreateObjectException{
 		if (validateInput()) {
-			return new Project(projectNameTextField.getText(),
-					customerTextField.getText(),
-					addressTextField.getText(),
-					Date.valueOf(startDateTextField.getText()),
-					Date.valueOf(estimatedFinishingDateTextField.getText()),
-					null,
-					null,
-					(ProjectType) projectTypeComboBox.getSelectedItem(),
-					Integer.valueOf(estimatedCostTextField.getText()),
-					0);
+//			return new Project(projectNameTextField.getText(),
+//					DbController.getAllClients().indexOf();
+//					clientSelectorComboBox.getText(),
+//					addressTextField.getText(),
+//					Date.valueOf(startDateTextField.getText()),
+//					Date.valueOf(estimatedFinishingDateTextField.getText()),
+//					null,
+//					null,
+//					(ProjectType) projectTypeComboBox.getSelectedItem(),
+//					Integer.valueOf(estimatedCostTextField.getText()),
+//					0);
+			return new Project();
 		}
 		throw new CanNotCreateObjectException("Project");
 	}
@@ -239,9 +258,9 @@ public class AddNewProjectDialog extends NewDataAbstractDialog {
 			return false;
 		}
 		//TODO - Ariel Fix client in GUI - add list choice of clients of add new (Can get the list by using the DB.getAllObjectsFromDB(Client.class)
-		if (!DbController.findClient(customerTextField.getText())){
-			return false;
-		}
+//		if (!DbController.getAllClients(clientSelectorComboBox.getText())){
+//			return false;
+//		}
 		return true;
 	}
 

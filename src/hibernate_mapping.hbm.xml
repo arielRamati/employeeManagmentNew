@@ -67,8 +67,8 @@
         <property name="projectName">
             <column name="projectName"/>
         </property>
-        <property name="client">
-            <column name="client"/>
+        <property name="clientSerialNumber">
+            <column name="clientSerialNumber"/>
         </property>
         <property name="projectAddress">
             <column name="projectAddress"/>
@@ -88,8 +88,8 @@
         <property name="projectType">
             <column name="projectType"/>
         </property>
-        <property name="estimatedCost">
-            <column name="estimatedCost"/>
+        <property name="estimatedCostForMe">
+            <column name="estimatedCostForMe"/>
         </property>
         <property name="actualCost">
             <column name="actualCost"/>

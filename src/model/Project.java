@@ -1,5 +1,7 @@
 package model;
 
+import com.sun.istack.internal.NotNull;
+import com.sun.istack.internal.Nullable;
 import model_params.ProjectType;
 import org.hibernate.annotations.GenericGenerator;
 
@@ -18,29 +20,54 @@ public class Project extends TableElement {
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private int serialNumber;
     private String projectName;
-    private String client;
+    private int clientSerialNumber;
     private String projectAddress;
     private Date startingDate;
     private Date approximateFinishDate;
     private Date actualFinishDate;
     private String extras;
     private ProjectType projectType;
-    private int estimatedCost;
+    private int estimatedCostForMe;
     private int actualCost;
+    private int firstPriceOffer;
+    private int totalCostForClient;
+    private int totalPayed;
+    private boolean isFinish;
 
     public Project(){}
+//
+//    public Project (String projectName, int client, String projectAddress, Date startingDate,
+//                    Date approximateFinishDate, Date actualFinishDate, String extras, ProjectType projectType,
+//                    int estimatedCost, int actualCost) {
+//        this.projectName = projectName;
+//        this.clientSerialNumber = client;
+//        this.projectAddress = projectAddress;
+//        this.startingDate = startingDate;
+//        this.approximateFinishDate = approximateFinishDate;
+//        this.actualFinishDate = actualFinishDate;
+//        this.extras = extras;
+//        this.projectType = projectType;
+//        this.estimatedCostForMe = estimatedCost;
+//        this.actualCost = actualCost;
+//    }
 
-    public Project(String projectName, String client, String projectAddress, Date startingDate, Date approximateFinishDate, Date actualFinishDate, String extras, ProjectType projectType, int estimatedCost, int actualCost) {
+    public Project(@NotNull String projectName, @NotNull int clientSerialNumber, @Nullable String projectAddress,
+                   @NotNull Date startingDate, @NotNull ProjectType projectType, @Nullable Integer estimatedCost,
+                   @Nullable Integer firstPriceOffer, @Nullable Integer totalCostForClient, @NotNull int totalPayed) {
         this.projectName = projectName;
-        this.client = client;
+        this.clientSerialNumber = clientSerialNumber;
         this.projectAddress = projectAddress;
         this.startingDate = startingDate;
-        this.approximateFinishDate = approximateFinishDate;
-        this.actualFinishDate = actualFinishDate;
-        this.extras = extras;
+        this.approximateFinishDate = null;
+        this.actualFinishDate = null;
+        this.extras = null;
         this.projectType = projectType;
-        this.estimatedCost = estimatedCost;
-        this.actualCost = actualCost;
+        this.estimatedCostForMe = estimatedCost != null ? estimatedCost : 0;
+        this.actualCost = 0;
+        this.firstPriceOffer = firstPriceOffer != null ? firstPriceOffer : 0 ;
+        this.totalCostForClient = totalCostForClient != null ? totalCostForClient : 0 ;
+        this.totalPayed = totalPayed;
+        isFinish = false;
     }
 
     public int getSerialNumber() {
@@ -59,12 +86,12 @@ public class Project extends TableElement {
         this.projectName = projectName;
     }
 
-    public String getClient() {
-        return client;
+    public int getClientSerialNumber() {
+        return clientSerialNumber;
     }
 
-    public void setClient(String client) {
-        this.client = client;
+    public void setClientSerialNumber(int clientSerialNumber) {
+        this.clientSerialNumber = clientSerialNumber;
     }
 
     public String getProjectAddress() {
@@ -115,12 +142,12 @@ public class Project extends TableElement {
         this.projectType = projectType;
     }
 
-    public int getEstimatedCost() {
-        return estimatedCost;
+    public int getEstimatedCostForMe () {
+        return estimatedCostForMe;
     }
 
-    public void setEstimatedCost(int estimatedCost) {
-        this.estimatedCost = estimatedCost;
+    public void setEstimatedCostForMe (int estimatedCostForMe) {
+        this.estimatedCostForMe = estimatedCostForMe;
     }
 
     public int getActualCost() {
@@ -129,5 +156,37 @@ public class Project extends TableElement {
 
     public void setActualCost(int actualCost) {
         this.actualCost = actualCost;
+    }
+
+    public int getFirstPriceOffer() {
+        return firstPriceOffer;
+    }
+
+    public void setFirstPriceOffer(int firstPriceOffer) {
+        this.firstPriceOffer = firstPriceOffer;
+    }
+
+    public int getTotalCostForClient() {
+        return totalCostForClient;
+    }
+
+    public void setTotalCostForClient(int totalCostForClient) {
+        this.totalCostForClient = totalCostForClient;
+    }
+
+    public int getTotalPayed() {
+        return totalPayed;
+    }
+
+    public void setTotalPayed(int totalPayed) {
+        this.totalPayed = totalPayed;
+    }
+
+    public boolean isFinish () {
+        return isFinish;
+    }
+
+    public void setFinish (boolean finish) {
+        isFinish = finish;
     }
 }
