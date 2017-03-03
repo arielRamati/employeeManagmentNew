@@ -13,12 +13,9 @@ import javax.persistence.*;
 public class Employee extends TableElement {
 
     @Id
-    @GenericGenerator(name = "generate", strategy = "increment")
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    private int employeeSerialNumber;
+    private String employeeID;
     private String employeeFirstName;
     private String employeeLastName;
-    private String employeeIDNumber;
     private Date ishurExpirationDate;
     @Enumerated(EnumType.STRING)
     private Nationality nationality;
@@ -39,7 +36,7 @@ public class Employee extends TableElement {
                     EmployeeType type, String phoneNumber, String address, String manager, int travelEx) {
         this.employeeFirstName = firstName;
         this.employeeLastName = lastName;
-        this.employeeIDNumber = id;
+        this.employeeID = id;
         this.ishurExpirationDate = ishurExpiration;
         nationality = nash;
         this.idImage = idImage;
@@ -50,13 +47,6 @@ public class Employee extends TableElement {
         this.travelExpenses = travelEx;
     }
 
-    public int getEmployeeSerialNumber() {
-        return employeeSerialNumber;
-    }
-
-    public void setEmployeeSerialNumber(int employeeSerialNumber) {
-        this.employeeSerialNumber = employeeSerialNumber;
-    }
 
     public String getEmployeeFirstName() {
         return employeeFirstName;
@@ -74,12 +64,12 @@ public class Employee extends TableElement {
         this.employeeLastName = employeeLastName;
     }
 
-    public String getEmployeeIDNumber() {
-        return employeeIDNumber;
+    public String getEmployeeID() {
+        return employeeID;
     }
 
-    public void setEmployeeIDNumber(String employeeIDNumber) {
-        this.employeeIDNumber = employeeIDNumber;
+    public void setEmployeeID(String employeeIDNumber) {
+        this.employeeID = employeeIDNumber;
     }
 
     public Date getIshurExpirationDate() {

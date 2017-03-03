@@ -11,6 +11,7 @@ import java.util.Map;
 
 import Controller.TableNames;
 import com.sun.org.apache.regexp.internal.RE;
+import com.sun.org.apache.xml.internal.serializer.utils.SystemIDResolver;
 import model.*;
 import model_params.PaymentType;
 import model_params.ProjectType;
@@ -71,7 +72,8 @@ public class Db {
 //			fos.write(payments.get(0).getPaymentImage());
 //			fos.close();
 
-			Db.getInstance().findClient("Kobi");
+			Project project = new Project("שיפוץ בבן צבי", 11, "תל אביב", new Date(System.currentTimeMillis()), ProjectType.BUILDING, 5000, 30000, 35000, 20000);
+			Db.getInstance().saveData(project);
 		} catch (Exception ignore) {}
 	}
 
@@ -106,6 +108,7 @@ public class Db {
 					session.close();
 				} catch (HibernateException e) {
 					//writing log message
+					e.printStackTrace();
 				}
 			}
 		}
@@ -136,6 +139,7 @@ public class Db {
 					session.close();
 				} catch (HibernateException e) {
 					//writing log message
+					e.printStackTrace();
 				}
 			}
 		}

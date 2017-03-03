@@ -14,11 +14,10 @@ import java.sql.Date;
 public class Salary extends TableElement{
 
     @Id
-    @GenericGenerator(name = "generate", strategy = "increment")
+    @GenericGenerator(name="generate" , strategy="increment")
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private int serialNumber;
     private String employeeID;
-    private String employeeName;
     private SalaryType salaryType;
     private int fee;
     private Date startingFeeDate;
@@ -26,9 +25,8 @@ public class Salary extends TableElement{
 
     public Salary(){}
 
-    public Salary(String employeeID, String employeeName, SalaryType salaryType, int fee, Date startingFeeDate, Date endFeeDate) {
+    public Salary(String employeeID, SalaryType salaryType, int fee, Date startingFeeDate, Date endFeeDate) {
         this.employeeID = employeeID;
-        this.employeeName = employeeName;
         this.salaryType = salaryType;
         this.fee = fee;
         this.startingFeeDate = startingFeeDate;
@@ -49,14 +47,6 @@ public class Salary extends TableElement{
 
     public void setEmployeeID(String employeeID) {
         this.employeeID = employeeID;
-    }
-
-    public String getEmployeeName() {
-        return employeeName;
-    }
-
-    public void setEmployeeName(String employeeName) {
-        this.employeeName = employeeName;
     }
 
     public SalaryType getSalaryType() {

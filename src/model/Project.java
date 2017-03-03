@@ -182,11 +182,11 @@ public class Project extends TableElement {
         this.totalPayed = totalPayed;
     }
 
-    public boolean isFinish () {
+    public boolean getIsFinish () {
         return isFinish;
     }
 
-    public void setFinish (boolean finish) {
+    public void setIsFinish (boolean finish) {
         isFinish = finish;
     }
 }

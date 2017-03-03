@@ -4,17 +4,13 @@
         "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
     <class name="model.Employee" table="employees">
-        <id column="serialNumber" name="employeeSerialNumber" >
-            <generator class="increment"/>
+        <id column="ID" name="employeeID" >
         </id>
         <property name="employeeFirstName">
             <column name="firstName"/>
         </property>
         <property name="employeeLastName">
             <column name="lastName"/>
-        </property>
-        <property name="employeeIDNumber">
-            <column name="ID"/>
         </property>
         <property name="ishurExpirationDate">
             <column name="ishurExpirationDate"/>
@@ -94,6 +90,18 @@
         <property name="actualCost">
             <column name="actualCost"/>
         </property>
+        <property name="firstPriceOffer">
+            <column name="firstPriceOffer"/>
+        </property>
+        <property name="totalCostForClient">
+            <column name="totalCostForClient"/>
+        </property>
+        <property name="totalPayed">
+            <column name="totalPayed"/>
+        </property>
+        <property name="isFinish">
+            <column name="isFinish"/>
+        </property>
     </class>
 
     <class name="model.Supplier" table="suppliers">
@@ -115,9 +123,12 @@
     </class>
 
     <class name="model.WorkingHours" table="working_hours">
-        <id column="serialNumber" name="employeeSerialNumber" >
+        <id column="serialNumber" name="serialNumber" >
             <generator class="increment"/>
         </id>
+        <property name="employeeID">
+            <column name="employeeID"/>
+        </property>
         <property name="day">
             <column name="day"/>
         </property>
@@ -127,8 +138,8 @@
         <property name="leavingHour">
             <column name="leavingHour"/>
         </property>
-        <property name="projectName">
-            <column name="projectName"/>
+        <property name="projectSerialNumber">
+            <column name="projectSerialNumber"/>
         </property>
     </class>
 
@@ -138,9 +149,6 @@
         </id>
         <property name="employeeID">
             <column name="employeeID"/>
-        </property>
-        <property name="employeeName">
-            <column name="employeeName"/>
         </property>
         <property name="salaryType">
             <column name="salaryType"/>
@@ -160,6 +168,15 @@
         <id column="serialNumber" name="serialNumber" >
             <generator class="increment"/>
         </id>
+        <property name="projectSerialNumber">
+            <column name="projectSerialNumber"/>
+        </property>
+        <property name="subProjectSerialNumber">
+            <column name="subProjectSerialNumber"/>
+        </property>
+        <property name="supplierSerialNumber">
+            <column name="supplierSerialNumber"/>
+        </property>
         <property name="paymentType">
             <column name="paymentType"/>
         </property>
@@ -181,9 +198,7 @@
         <property name="paymentImage">
             <column name="paymentImage"/>
         </property>
-        <property name="projectName">
-            <column name="projectName"/>
-        </property>
+
         <property name="comment">
             <column name="comment"/>
         </property>

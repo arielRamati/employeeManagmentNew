@@ -18,6 +18,9 @@ public class Payment extends TableElement{
     @GenericGenerator(name = "generate", strategy = "increment")
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private int serialNumber;
+    private int projectSerialNumber;
+    private int subProjectSerialNumber;
+    private int supplierSerialNumber;
     private PaymentType paymentType;
     private String receiver;
     private long paymentSum;
@@ -25,22 +28,38 @@ public class Payment extends TableElement{
     private String paymentMethod;
     private int numberOfPayments;
     private byte[] paymentImage;
-    private String projectName;
     private String comment;
 
     public Payment() {
     }
 
-    public Payment(PaymentType paymentType, String receiver, long sum, Date paymentDate, String paymentMethod,
-                   int numberOfPayments, byte[] paymentImage, String projectName, String comment) {
+    public Payment(int projectSerialNumber, int subProjectSerialNumber, int supplierSerialNumber, PaymentType paymentType, String receiver,
+                   long paymentSum, Date paymentDate, String paymentMethod, int numberOfPayments, byte[] paymentImage,
+                   String comment) {
+        this.projectSerialNumber = projectSerialNumber;
+        this.subProjectSerialNumber = subProjectSerialNumber;
+        this.supplierSerialNumber = supplierSerialNumber;
         this.paymentType = paymentType;
         this.receiver = receiver;
-        this.paymentSum = sum;
+        this.paymentSum = paymentSum;
         this.paymentDate = paymentDate;
         this.paymentMethod = paymentMethod;
         this.numberOfPayments = numberOfPayments;
         this.paymentImage = paymentImage;
-        this.projectName = projectName;
+        this.comment = comment;
+    }
+
+    public Payment(int projectSerialNumber, int supplierSerialNumber, PaymentType paymentType, String receiver, long paymentSum, Date paymentDate,
+                   String paymentMethod, int numberOfPayments, byte[] paymentImage, String comment) {
+        this.projectSerialNumber = projectSerialNumber;
+        this.supplierSerialNumber = supplierSerialNumber;
+        this.paymentType = paymentType;
+        this.receiver = receiver;
+        this.paymentSum = paymentSum;
+        this.paymentDate = paymentDate;
+        this.paymentMethod = paymentMethod;
+        this.numberOfPayments = numberOfPayments;
+        this.paymentImage = paymentImage;
         this.comment = comment;
     }
 
@@ -50,6 +69,22 @@ public class Payment extends TableElement{
 
     public void setSerialNumber(int serialNumber) {
         this.serialNumber = serialNumber;
+    }
+
+    public int getProjectSerialNumber() {
+        return projectSerialNumber;
+    }
+
+    public void setProjectSerialNumber(int projectSerialNumber) {
+        this.projectSerialNumber = projectSerialNumber;
+    }
+
+    public int getSubProjectSerialNumber() {
+        return subProjectSerialNumber;
+    }
+
+    public void setSubProjectSerialNumber(int subProjectSerialNumber) {
+        this.subProjectSerialNumber = subProjectSerialNumber;
     }
 
     public PaymentType getPaymentType() {
@@ -72,8 +107,8 @@ public class Payment extends TableElement{
         return paymentSum;
     }
 
-    public void setPaymentSum(long sum) {
-        this.paymentSum = sum;
+    public void setPaymentSum(long paymentSum) {
+        this.paymentSum = paymentSum;
     }
 
     public Date getPaymentDate() {
@@ -100,20 +135,20 @@ public class Payment extends TableElement{
         this.numberOfPayments = numberOfPayments;
     }
 
+    public int getSupplierSerialNumber() {
+        return supplierSerialNumber;
+    }
+
+    public void setSupplierSerialNumber(int supplierSerialNumber) {
+        this.supplierSerialNumber = supplierSerialNumber;
+    }
+
     public byte[] getPaymentImage() {
         return paymentImage;
     }
 
     public void setPaymentImage(byte[] paymentImage) {
         this.paymentImage = paymentImage;
-    }
-
-    public String getProjectName() {
-        return projectName;
-    }
-
-    public void setProjectName(String projectName) {
-        this.projectName = projectName;
     }
 
     public String getComment() {

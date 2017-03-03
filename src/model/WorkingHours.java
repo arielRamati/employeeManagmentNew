@@ -1,32 +1,50 @@
 package model;
 
+import org.hibernate.annotations.GenericGenerator;
+
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import java.sql.Date;
 
 public class WorkingHours extends TableElement{
 
-	private int employeeSerialNumber;
+	@Id
+	@GenericGenerator(name="generate" , strategy="increment")
+	@GeneratedValue(strategy = GenerationType.SEQUENCE)
+	private int serialNumber;
+	private int employeeID;
+	private int projectSerialNumber;
 	private Date day;
 	private int enteringHour;
 	private int leavingHour;
-	private String projectName;
 
 	public WorkingHours(){}
 
-	public WorkingHours(int employeeSerialNumber, Date date, int start, int end, String projectName){
-		this.employeeSerialNumber = employeeSerialNumber;
+	public WorkingHours(int employeeID, int projectSerialNumber, Date date, int start, int end){
+		this.employeeID = employeeID;
+		this.projectSerialNumber = projectSerialNumber;
 		this.day = date;
 		this.enteringHour = start;
 		this.leavingHour = end;
-		this.projectName = projectName;
+
 	}
 
 	//deafult values for entering and leaving work
-	public WorkingHours(int employeeSerialNumber, Date date, String projectName) {
-		this.employeeSerialNumber = employeeSerialNumber;
-		this.projectName = projectName;
+	public WorkingHours(int employeeID, int projectSerialNumber, Date date) {
+		this.employeeID = employeeID;
+		this.projectSerialNumber = projectSerialNumber;
 		this.day = date;
 		this.enteringHour = 7;
 		this.leavingHour = 4;
+	}
+
+	public int getSerialNumber() {
+		return serialNumber;
+	}
+
+	public void setSerialNumber(int serialNumber) {
+		this.serialNumber = serialNumber;
 	}
 
 	public Date getDay() {
@@ -41,16 +59,20 @@ public class WorkingHours extends TableElement{
 		return leavingHour;
 	}
 
-	public String getProjectName() {
-		return projectName;
+	public int getProjectSerialNumber() {
+		return projectSerialNumber;
 	}
 
-	public int getEmployeeSerialNumber() {
-		return employeeSerialNumber;
+	public void setProjectSerialNumber(int projectSerialNumber) {
+		this.projectSerialNumber = projectSerialNumber;
 	}
 
-	public void setEmployeeSerialNumber(int employeeSerialNumber) {
-		this.employeeSerialNumber = employeeSerialNumber;
+	public int getEmployeeID() {
+		return employeeID;
+	}
+
+	public void setEmployeeID(int employeeSerialNumber) {
+		this.employeeID = employeeSerialNumber;
 	}
 
 	public void setDay(Date day) {
@@ -65,7 +87,4 @@ public class WorkingHours extends TableElement{
 		this.leavingHour = leavingHour;
 	}
 
-	public void setProjectName(String projectName) {
-		this.projectName = projectName;
-	}
 }
