@@ -72,8 +72,22 @@ public class Db {
 //			fos.write(payments.get(0).getPaymentImage());
 //			fos.close();
 
-			Project project = new Project("שיפוץ בבן צבי", 11, "תל אביב", new Date(System.currentTimeMillis()), ProjectType.BUILDING, 5000, 30000, 35000, 20000);
-			Db.getInstance().saveData(project);
+//			Project project = new Project("שיפוץ בבן צבי", 11, "תל אביב", new Date(System.currentTimeMillis()), ProjectType.BUILDING, 5000, 30000, 35000, 20000);
+//			Payment payment = new Payment(1, -1, PaymentType.PAYMENT, "יוסי בן אבו", 5000, new Date(116, 10, 25), "אשראי", 3, null, "אין");
+
+			Client client = new Client("משה", "כהן", "גבעתיים אחת שתיים", "0528923849");
+			getInstance().saveData(client);
+//			Date from = new Date(116, 10, 24);
+//			Date to = new Date(System.currentTimeMillis());
+//			List<Payment> list = Db.getInstance().getPaymentsBetweenDates(from, to);
+//			for(Payment payment : list) {
+//				System.out.print("Paid on " + payment.getPaymentDate());
+//			}
+			List<Client> clients = getInstance().getAllObjectsFromDB(Client.class);
+			for(Client client1 : clients) {
+				client1.setAddress("יוסי יוסי משה משה");
+				getInstance().updateData(client1);
+			}
 		} catch (Exception ignore) {}
 	}
 
@@ -146,19 +160,6 @@ public class Db {
 
 		return isSucceeded;
 	}
-
-	
-	private static boolean insertDataToFile(TableNames tableName, File file, Map<String, Object> map){
-		//TODO xml write
-		//need to create xml for each table in the sql
-		switch (tableName){
-		case EMPLOYEE_TABLE:
-			saveEmployeeTable(map);
-			
-		}
-		
-		return true;
-	}
 	
 	private static boolean saveEmployeeTable(Map<String, Object> map) {
 		//i can cast to employee
@@ -177,4 +178,74 @@ public class Db {
 		//TODO- Kobi add query to check if this client name exist in the DB
 		return !results.isEmpty();
 	}
+
+
+	@SuppressWarnings("unchecked")
+	public List<Payment> getPaymentsBetweenDates(Date from, Date to) {
+		Session session = null;
+		try {
+		session = sessionFactory.openSession();
+		return session.createCriteria(Payment.class)
+				.add(Restrictions.between("paymentDate", from, to)).list();
+		} finally {
+			if (session != null) {
+				try {
+					session.close();
+				} catch (HibernateException e) {
+					//writing log message
+					e.printStackTrace();
+				}
+			}
+		}
+	}
+
+	public <E> boolean updateData(E addToDbObj) {
+		boolean isSucceeded;
+		Session session = null;
+		Transaction transaction = null;
+		try {
+			session = sessionFactory.openSession();
+			transaction = session.beginTransaction();
+			session.saveOrUpdate(addToDbObj);
+			transaction.commit();
+			isSucceeded = true;
+		} catch (HibernateException e) {
+			isSucceeded = false;
+			e.printStackTrace();
+			if (transaction != null) {
+				transaction.rollback();
+			}
+		} finally {
+			if (session != null) {
+				try {
+					session.close();
+				} catch (HibernateException e) {
+					//writing log message
+					e.printStackTrace();
+				}
+			}
+		}
+
+		return isSucceeded;
+	}
+
+	@SuppressWarnings("unchecked")
+	public List<SubProject> getSubProjectsFromProject(int projectSerialNumber) {
+		Session session = null;
+		try {
+			session = sessionFactory.openSession();
+			return session.createCriteria(SubProject.class)
+					.add(Restrictions.eq("projectSerialNumber", projectSerialNumber)).list();
+		} finally {
+			if (session != null) {
+				try {
+					session.close();
+				} catch (HibernateException e) {
+					//writing log message
+					e.printStackTrace();
+				}
+			}
+		}
+	}
+
 }
