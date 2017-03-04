@@ -25,13 +25,13 @@ import org.hibernate.classic.Session;
 import org.hibernate.criterion.Restrictions;
 
 public class Db {
-	
-	static final String FILE_LOCATION = "";
-	private static Db instance;
-	private SessionFactory sessionFactory = null;
 
-	public static void main(String[] args) {
-		try {
+    static final String FILE_LOCATION = "";
+    private static Db instance;
+    private SessionFactory sessionFactory = null;
+
+    public static void main(String[] args) {
+        try {
 //			File pic = new File("C:\\Users\\Kobi\\Pictures\\f2fb2fcc3c9b2ada37cf02af881511b1.jpg");
 //			byte[] bFile = new byte[(int) pic.length()];
 //				FileInputStream fileInputStream = new FileInputStream(pic);
@@ -75,177 +75,175 @@ public class Db {
 //			Project project = new Project("שיפוץ בבן צבי", 11, "תל אביב", new Date(System.currentTimeMillis()), ProjectType.BUILDING, 5000, 30000, 35000, 20000);
 //			Payment payment = new Payment(1, -1, PaymentType.PAYMENT, "יוסי בן אבו", 5000, new Date(116, 10, 25), "אשראי", 3, null, "אין");
 
-			Client client = new Client("משה", "כהן", "גבעתיים אחת שתיים", "0528923849");
-			getInstance().saveData(client);
+
 //			Date from = new Date(116, 10, 24);
 //			Date to = new Date(System.currentTimeMillis());
 //			List<Payment> list = Db.getInstance().getPaymentsBetweenDates(from, to);
 //			for(Payment payment : list) {
 //				System.out.print("Paid on " + payment.getPaymentDate());
 //			}
-			List<Client> clients = getInstance().getAllObjectsFromDB(Client.class);
-			for(Client client1 : clients) {
-				client1.setAddress("יוסי יוסי משה משה");
-				getInstance().updateData(client1);
-			}
-		} catch (Exception ignore) {}
-	}
+//            List<Client> clients = getInstance().getAllObjectsFromDB(Client.class);
+//            for (Client client1 : clients) {
+//                client1.setAddress("הרב משה בן משה");
+//                getInstance().updateData(client1);
+//            }
+            Client client = new Client("משה", "כהן", "גבעתיים אחת שתיים", "0528923849");
+            System.out.print(getInstance().updateData(client));
+        } catch (Exception ignore) {
+        }
+    }
 
-	private Db() {
-		sessionFactory = new AnnotationConfiguration().configure().buildSessionFactory();
-	}
+    private Db() {
+        sessionFactory = new AnnotationConfiguration().configure().buildSessionFactory();
+    }
 
-	public static Db getInstance() {
-		if (instance == null) {
-			instance = new Db();
-		}
-		return instance;
-	}
+    public static Db getInstance() {
+        if (instance == null) {
+            instance = new Db();
+        }
+        return instance;
+    }
 
-	public <E> List<E> getAllObjectsFromDB(Class objClass)
-	{
-		Session session = null;
-		Transaction transaction = null;
-		List dbList = null;
-		try
-		{
-			session = sessionFactory.openSession();
-			transaction = session.beginTransaction();
-			dbList = session.createCriteria(objClass).list();
-		} catch(HibernateException e) {
-			if (transaction!=null) transaction.rollback();
-		}
-		finally {
-			if (session != null)
-			{
-				try {
-					session.close();
-				} catch (HibernateException e) {
-					//writing log message
-					e.printStackTrace();
-				}
-			}
-		}
+    public <E> List<E> getAllObjectsFromDB(Class objClass) {
+        Session session = null;
+        Transaction transaction = null;
+        List dbList = null;
+        try {
+            session = sessionFactory.openSession();
+            transaction = session.beginTransaction();
+            dbList = session.createCriteria(objClass).list();
+        } catch (HibernateException e) {
+            if (transaction != null) transaction.rollback();
+        } finally {
+            if (session != null) {
+                try {
+                    session.close();
+                } catch (HibernateException e) {
+                    //writing log message
+                    e.printStackTrace();
+                }
+            }
+        }
 
-		return dbList;
-	}
+        return dbList;
+    }
 
 
-	public <E> boolean saveData(E addToDbObj) {
-		boolean isSucceeded;
-		Session session = null;
-		Transaction transaction = null;
-		try {
-			session = sessionFactory.openSession();
-			transaction = session.beginTransaction();
-			session.save(addToDbObj);
-			transaction.commit();
-			isSucceeded = true;
-		} catch (HibernateException e) {
-			isSucceeded = false;
-			e.printStackTrace();
-			if (transaction != null) {
-				transaction.rollback();
-			}
-		} finally {
-			if (session != null) {
-				try {
-					session.close();
-				} catch (HibernateException e) {
-					//writing log message
-					e.printStackTrace();
-				}
-			}
-		}
+    public <E> boolean saveData(E addToDbObj) {
+        boolean isSucceeded;
+        Session session = null;
+        Transaction transaction = null;
+        try {
+            session = sessionFactory.openSession();
+            transaction = session.beginTransaction();
+            session.save(addToDbObj);
+            transaction.commit();
+            isSucceeded = true;
+        } catch (HibernateException e) {
+            isSucceeded = false;
+            e.printStackTrace();
+            if (transaction != null) {
+                transaction.rollback();
+            }
+        } finally {
+            if (session != null) {
+                try {
+                    session.close();
+                } catch (HibernateException e) {
+                    //writing log message
+                    e.printStackTrace();
+                }
+            }
+        }
 
-		return isSucceeded;
-	}
-	
-	private static boolean saveEmployeeTable(Map<String, Object> map) {
-		//i can cast to employee
-		return false;
-	}
+        return isSucceeded;
+    }
 
-	public boolean findClient(String clientName){
-		Session session = sessionFactory.openSession();
-		List results = session.createCriteria(Client.class)
-				.add(Restrictions.eq("firstName", clientName)).add(Restrictions.eq("lastName", "Cohen"))
-				.list();
+    private static boolean saveEmployeeTable(Map<String, Object> map) {
+        //i can cast to employee
+        return false;
+    }
+
+    public boolean findClient(String clientName) {
+        Session session = sessionFactory.openSession();
+        List results = session.createCriteria(Client.class)
+                .add(Restrictions.eq("firstName", clientName)).add(Restrictions.eq("lastName", "Cohen"))
+                .list();
 //		Query query = s ession.createQuery("FROM clients WHERE firstName = :firstName ");
 //		query.setParameter("firstName", clientName);
 //		List results = query.list();
 
-		//TODO- Kobi add query to check if this client name exist in the DB
-		return !results.isEmpty();
-	}
+        //TODO- Kobi add query to check if this client name exist in the DB
+        return !results.isEmpty();
+    }
 
 
-	@SuppressWarnings("unchecked")
-	public List<Payment> getPaymentsBetweenDates(Date from, Date to) {
-		Session session = null;
-		try {
-		session = sessionFactory.openSession();
-		return session.createCriteria(Payment.class)
-				.add(Restrictions.between("paymentDate", from, to)).list();
-		} finally {
-			if (session != null) {
-				try {
-					session.close();
-				} catch (HibernateException e) {
-					//writing log message
-					e.printStackTrace();
-				}
-			}
-		}
-	}
+    @SuppressWarnings("unchecked")
+    public List<Payment> getPaymentsBetweenDates(Date from, Date to) {
+        Session session = null;
+        try {
+            session = sessionFactory.openSession();
+            return session.createCriteria(Payment.class)
+                    .add(Restrictions.between("paymentDate", from, to)).list();
+        } finally {
+            if (session != null) {
+                try {
+                    session.close();
+                } catch (HibernateException e) {
+                    //writing log message
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
 
-	public <E> boolean updateData(E addToDbObj) {
-		boolean isSucceeded;
-		Session session = null;
-		Transaction transaction = null;
-		try {
-			session = sessionFactory.openSession();
-			transaction = session.beginTransaction();
-			session.saveOrUpdate(addToDbObj);
-			transaction.commit();
-			isSucceeded = true;
-		} catch (HibernateException e) {
-			isSucceeded = false;
-			e.printStackTrace();
-			if (transaction != null) {
-				transaction.rollback();
-			}
-		} finally {
-			if (session != null) {
-				try {
-					session.close();
-				} catch (HibernateException e) {
-					//writing log message
-					e.printStackTrace();
-				}
-			}
-		}
+    public <E> boolean updateData(E addToDbObj) {
+        boolean isSucceeded;
+        Session session = null;
+        Transaction transaction = null;
+        try {
+            session = sessionFactory.openSession();
+            transaction = session.beginTransaction();
+            session.update(addToDbObj);
+            transaction.commit();
+            isSucceeded = true;
+        } catch (HibernateException e) {
+            isSucceeded = false;
+            e.printStackTrace();
+            if (transaction != null) {
+                transaction.rollback();
+            }
+        } finally {
+            if (session != null) {
+                try {
+                    session.close();
+                } catch (HibernateException e) {
+                    //writing log message
+                    e.printStackTrace();
+                }
+            }
+        }
 
-		return isSucceeded;
-	}
+        return isSucceeded;
+    }
 
-	@SuppressWarnings("unchecked")
-	public List<SubProject> getSubProjectsFromProject(int projectSerialNumber) {
-		Session session = null;
-		try {
-			session = sessionFactory.openSession();
-			return session.createCriteria(SubProject.class)
-					.add(Restrictions.eq("projectSerialNumber", projectSerialNumber)).list();
-		} finally {
-			if (session != null) {
-				try {
-					session.close();
-				} catch (HibernateException e) {
-					//writing log message
-					e.printStackTrace();
-				}
-			}
-		}
-	}
+    @SuppressWarnings("unchecked")
+    public List<SubProject> getSubProjectsFromProject(int projectSerialNumber) {
+        Session session = null;
+        try {
+            session = sessionFactory.openSession();
+            return session.createCriteria(SubProject.class)
+                    .add(Restrictions.eq("projectSerialNumber", projectSerialNumber)).list();
+        } finally {
+            if (session != null) {
+                try {
+                    session.close();
+                } catch (HibernateException e) {
+                    //writing log message
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
 
 }
