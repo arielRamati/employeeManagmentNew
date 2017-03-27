@@ -11,7 +11,6 @@ public enum TableNames {
 	SUPPLIERS,
 	INVOICES,
 	PRODUCTS,
-	PAYMENTS,
-	PAYCHECKS;
+	PAYMENTS;
 
 }

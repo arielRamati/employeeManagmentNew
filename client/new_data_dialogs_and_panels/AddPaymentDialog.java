@@ -20,7 +20,7 @@ import javax.swing.JComboBox;
 import javax.swing.JTextField;
 import javax.swing.DefaultComboBoxModel;
 
-public class addPaymentDialog extends NewDataAbstractDialog {
+public class AddPaymentDialog extends NewDataAbstractDialog {
 
 	private final JPanel contentPanel = new JPanel();
 	JComboBox<String> paymentTypeComboBox;
@@ -36,7 +36,7 @@ public class addPaymentDialog extends NewDataAbstractDialog {
 	/**
 	 * Create the dialog.
 	 */
-	public addPaymentDialog() {
+	public AddPaymentDialog () {
 		setTitle("\u05D4\u05D6\u05E0\u05EA \u05EA\u05E9\u05DC\u05D5\u05DE\u05D9\u05DD");
 		setBounds(100, 100, 450, 464);
 		getContentPane().setLayout(new BorderLayout());
@@ -206,15 +206,16 @@ public class addPaymentDialog extends NewDataAbstractDialog {
 		if (!validateInput()) {
 			throw new CanNotCreateObjectException("Payment");
 		}
-		return new Payment((PaymentType)paymentTypeComboBox.getSelectedItem(),
-				gettingPayedTextField.getText(),
-				Integer.valueOf(paymentAmountTextField.getText()),
-				Date.valueOf(paymentDateTextField.getText()),
-				howPaymentDoneTextField.getText(),
-				Integer.valueOf(numberOfPaymentsTextField.getText()),
-				null,
-				projectNameTextField.getText(),
-				noteTextField.getText());
+//		return new Payment((PaymentType)paymentTypeComboBox.getSelectedItem(),
+//				gettingPayedTextField.getText(),
+//				Integer.valueOf(paymentAmountTextField.getText()),
+//				Date.valueOf(paymentDateTextField.getText()),
+//				howPaymentDoneTextField.getText(),
+//				Integer.valueOf(numberOfPaymentsTextField.getText()),
+//				null,
+//				projectNameTextField.getText(),
+//				noteTextField.getText());
+		return null;
 	}
 
 	private boolean validateInput() {

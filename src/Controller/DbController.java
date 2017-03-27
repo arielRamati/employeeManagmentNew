@@ -21,7 +21,7 @@ public class DbController {
 	public static boolean saveData(TableElement tableElement){
 		//TODO save the data in the data base
 		//need to think how to know where to save it and how to find it
-		Boolean saveResult = null;
+		boolean saveResult;
 		try {
 			saveResult = Db.getInstance().saveData(tableElement);
 		} catch (Exception e) {

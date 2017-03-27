@@ -30,7 +30,7 @@ public class MithadshimMainPanel extends JPanel {
 		
 		panel = new JPanel();
 		panel.setBackground(Color.LIGHT_GRAY);
-		panel.setBounds(new Rectangle(4, 40, 100, 100));
+		panel.setBounds(new Rectangle(4, 40, 80, 80));
 		add(panel, "name_822798581802102");
 		panel.setLayout(null);
 		
@@ -39,7 +39,7 @@ public class MithadshimMainPanel extends JPanel {
 			public void actionPerformed(ActionEvent arg0) {
 			}
 		});
-		btnNewButton.setBounds(139, 159, 179, 35);
+		btnNewButton.setBounds(170, 160, 179, 35);
 		panel.add(btnNewButton);
 		
 		JButton btnNewButton_1 = new JButton("\u05D4\u05D6\u05E0\u05EA \u05DE\u05D9\u05D3\u05E2 \u05D7\u05D3\u05E9");
@@ -49,17 +49,27 @@ public class MithadshimMainPanel extends JPanel {
 				changePanel(MithadshimMainFrame.getMainFrame(), new NewDataMainPanel());
 			}
 		});
-		btnNewButton_1.setBounds(139, 78, 179, 35);
-		panel.add(btnNewButton_1);	
-		
-		JButton btnNewButton_2 = new JButton("\u05D9\u05E6\u05D9\u05D0\u05D4");
-		btnNewButton_2.addActionListener(new ActionListener() {
+		btnNewButton_1.setBounds(170, 70, 179, 35);
+		panel.add(btnNewButton_1);
+
+		JButton editButton = new JButton("עריכת נתונים");
+		editButton.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				changePanel(MithadshimMainFrame.getMainFrame(), new NewDataMainPanel());
+			}
+		});
+		editButton.setBounds(170, 115, 179, 35);
+		panel.add(editButton);
+
+		JButton exitButton = new JButton("\u05D9\u05E6\u05D9\u05D0\u05D4");
+		exitButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				System.exit(0);
 			}
 		});
-		btnNewButton_2.setBounds(28, 216, 128, 35);
-		panel.add(btnNewButton_2);
+		exitButton.setBounds(28, 216, 128, 35);
+		panel.add(exitButton);
 	}
 	
 	public void changePanel(JFrame frame, JPanel newPanel){

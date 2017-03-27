@@ -1,12 +1,5 @@
 package gui_params;
 
-import new_data_dialogs_and_panels.AddEmployeeDialog;
-import new_data_dialogs_and_panels.AddNewProjectDialog;
-import new_data_dialogs_and_panels.AddSuplierDialog;
-import new_data_dialogs_and_panels.NewDataAbstractDialog;
-import new_data_dialogs_and_panels.addPaymentDialog;
-import new_data_dialogs_and_panels.addWorkingHoursDialog;
-
 public enum InsertDataOptions {
 
 	ADD_EMPLOYEE("הוסף עובד"),

@@ -89,7 +89,7 @@ public class NewDataMainPanel extends JPanel {
 				new addWorkingHoursDialog();
 				break;
 			case ENTER_FEE:
-				new addPaymentDialog();
+				new AddPaymentDialog();
 				break;
 			default:
 				break;

@@ -20,7 +20,7 @@ public enum EmployeeType {
 	WOODMAN("נגר"),
 	GARDEN("גנן"),
 	GUARD("שומר"),
-	FOREMAN("מנהל עבודה"),
+	CONTRACTOR("קבלן משנה;"),
 	DRIVER("הסעות");
 	
 	
