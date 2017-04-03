@@ -189,4 +189,8 @@ public class Project extends TableElement {
     public void setIsFinish (boolean finish) {
         isFinish = finish;
     }
+
+    public String toString() {
+        return this.getProjectName();
+    }
 }

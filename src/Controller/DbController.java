@@ -6,6 +6,7 @@ import java.util.Map;
 
 import db.Db;
 import model.Client;
+import model.Project;
 import model.TableElement;
 
 public class DbController {
@@ -35,4 +36,6 @@ public class DbController {
 	public static List<Client> getAllClients (){
 		return Db.getInstance().getAllObjectsFromDB(Client.class);
 	}
+
+	public static List<Project> getAllProjects() {return Db.getInstance().getAllObjectsFromDB(Project.class);}
 }

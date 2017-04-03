@@ -91,6 +91,9 @@ public class NewDataMainPanel extends JPanel {
 			case ENTER_FEE:
 				new AddPaymentDialog();
 				break;
+			case ADD_SUB_PROJECT:
+				new AddSubProjectDialog();
+				break;
 			default:
 				break;
 		}
